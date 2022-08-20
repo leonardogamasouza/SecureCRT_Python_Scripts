@@ -153,10 +153,10 @@ def single_device_jump(test_type):
     if command_list == "":
         crt.Dialog.MessageBox("Script Cancelled!")
         return
-    # Set jump box prompt.  NA> for GESA Proxy
-    jump_prompt = crt.Dialog.Prompt("What is the base prompt for jump box?:",
-                                    "Please enter prompt as shown on Jump Box",
-                                    "NA>", False)
+    # Set jump server prompt.  $ for GESA Proxy
+    jump_prompt = crt.Dialog.Prompt("What is the base prompt for jump server?:",
+                                    "Please enter prompt as shown on Jump Server",
+                                    "# or $", False)
     # Set file name for PRE or POST test. Files are saved to same directory that script is using.
 
     filename = name_file(test_type, elem)
@@ -169,7 +169,7 @@ def single_device_jump(test_type):
     crt.Screen.WaitForString(jump_prompt)
 
     # Connect to element from device list
-    crt.Screen.Send("connect " + elem + " " + '\r')
+    crt.Screen.Send("ssh " + elem + " " + '\r')
 
     # Wait for connection
     crt.Screen.WaitForString(prompt_string)
