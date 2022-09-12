@@ -120,14 +120,14 @@ def multi_device_jump(test_type):
             prompt_string = prompt_string.rstrip('\r\n')
             prompt_string = prompt_string.strip()
 
-            crt.Screen.Send('set cli screen-width 100 \r')
-            crt.Screen.WaitForString('set cli screen-width 100')
+            crt.Screen.Send('set cli screen-width 255 \r')
+            crt.Screen.WaitForString('set cli screen-width 255')
 
             # Work through command list file - Call command()
             command(filename, command_list, prompt_string)
 
             # After all commands are parsed the script exits device and for loop continues through device list
-            # crt.Sleep(500) <- Leftover Test Piece
+            # crt.Sleep(900) <- Leftover Test Piece
             crt.Screen.Send("exit " + '\r')
         if device_types == "2":
             new_device = False
@@ -145,7 +145,7 @@ def multi_device_jump(test_type):
 
 def single_device_jump(test_type):
     # Opens dialog to select device list text file
-    elem = crt.Dialog.Prompt("What is the name of the device?:", "Enter Device Name", "SNUlbMUSalpdc01", False)
+    elem = crt.Dialog.Prompt("What is the name of the device?:", "Enter Device Name", "xx", False)
     elem = elem.rstrip('\r\n')
     # Opens dialog to select command list text file
     command_list = open(crt.Dialog.FileOpenDialog(title="Please select a Command List text file",
@@ -190,14 +190,14 @@ def single_device(test_type):
     # Opens dialog to select device list text file
 
     crt.Screen.Send('\r')
-    crt.Screen.WaitForString('#')
+    crt.Screen.WaitForString('>')
     crt.Screen.Send('term length 0 \r')
-    crt.Screen.WaitForString('#')
+    crt.Screen.WaitForString('>')
     crt.Screen.Send('\r')
-    crt.Screen.WaitForString('#')
+    crt.Screen.WaitForString('>')
     screenrow = crt.Screen.CurrentRow - 1
     elem = crt.Screen.Get(screenrow, 1, screenrow, 40)
-    elem = elem.replace("#", "")
+    elem = elem.replace(">", "")
     elem = elem.rstrip('\r\n')
     elem = elem.strip()
 
@@ -216,8 +216,8 @@ def single_device(test_type):
     # Send return to for NA> that script is waiting for...
     crt.Screen.Send('\r')
     crt.Screen.WaitForString(prompt_string)
-    crt.Screen.Send('set cli screen-width 100 \r')
-    crt.Screen.WaitForString('set cli screen-width 100')
+    crt.Screen.Send('set cli screen-width 255 \r')
+    crt.Screen.WaitForString('set cli screen-width 255')
     # Work through command list file - Call command()
     command(filename, command_list, prompt_string)
 
@@ -236,7 +236,7 @@ def command(filename, command_list, prompt_string):
         crt.Screen.Send(cmd + " \r")
         trunc_command = cmd[-10:]
         # crt.Dialog.MessageBox(command)
-        crt.Screen.WaitForString(trunc_command + " \r")
+        crt.Screen.WaitForString('>')
         result = crt.Screen.ReadString(prompt_string)
         fileobj.write(cmd)
         fileobj.write(result)
