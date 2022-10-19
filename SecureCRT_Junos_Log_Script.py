@@ -1,6 +1,6 @@
 # $language = "Python"
 # $interface = "1.0"
- from __future__ import unicode_literals
+from __future__ import unicode_literals
 import sys
 reload(sys)
 sys.setdefaultencoding('utf8')
