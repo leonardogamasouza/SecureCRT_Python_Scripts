@@ -124,8 +124,8 @@ def multi_device_jump(test_type):
             prompt_string = prompt_string.rstrip('\r\n')
             prompt_string = prompt_string.strip()
 
-            crt.Screen.Send('set cli screen-width 255 \r')
-            crt.Screen.WaitForString('set cli screen-width 255')
+            crt.Screen.Send('term width 255 \r')
+            crt.Screen.WaitForString('term width 255')
 
             # Work through command list file - Call command()
             command(filename, command_list, prompt_string)
@@ -177,8 +177,8 @@ def single_device_jump(test_type):
 
     # Wait for connection
     crt.Screen.WaitForString(prompt_string)
-    crt.Screen.Send('set cli screen-width 100 \r')
-    crt.Screen.WaitForString('set cli screen-width 100')
+    crt.Screen.Send('term width 100 \r')
+    crt.Screen.WaitForString('term width 100')
 
     # Work through command list file - Call command()
     command(filename, command_list, prompt_string)
@@ -220,8 +220,8 @@ def single_device(test_type):
     # Send return to for NA# that script is waiting for...
     crt.Screen.Send('\r')
     crt.Screen.WaitForString(prompt_string)
-    crt.Screen.Send('set cli screen-width 255 \r')
-    crt.Screen.WaitForString('set cli screen-width 255')
+    crt.Screen.Send('term width 255 \r')
+    crt.Screen.WaitForString('term width 255')
     # Work through command list file - Call command()
     command(filename, command_list, prompt_string)
 
